@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    
+</head>
+<body>
+    <a href="@Url.Action("Index","Home")">首页</a>
+    <a href="@Url.Action("Login","Home")">登录</a>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
