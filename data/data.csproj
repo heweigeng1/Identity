@@ -58,14 +58,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityContext.cs" />
+    <Compile Include="Infrastructure\AppUserManager.cs" />
+    <Compile Include="Maping\AppUserMaping.cs" />
+    <Compile Include="Maping\RoleMaping.cs" />
+    <Compile Include="Maping\UserClaimMaping.cs" />
+    <Compile Include="Maping\UserLoginMaping.cs" />
+    <Compile Include="Maping\UserRoleMaping.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\UserClaim.cs" />
+    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -13,8 +13,9 @@ namespace web.Controllers
         {
             return View();
         }
-        public ActionResult Login()
+        public ActionResult Login(string username,string password)
         {
+
             return View();
         }
     }
