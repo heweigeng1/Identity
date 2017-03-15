@@ -1,8 +1,8 @@
 ﻿using data;
-using data.Models;
-using Microsoft.AspNet.Identity;
+using data.Infrastructure;
 using Microsoft.Owin;
 using Owin;
+using System.Web.Mvc;
 
 [assembly: OwinStartup(typeof(web.Startup))]
 namespace web
@@ -12,6 +12,7 @@ namespace web
         public void Configuration(IAppBuilder app)
         {
             IdentityContext identity=new IdentityContext();
+            app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<AppUserManager>());
             //ConfigureAuth(app);
             using (var db=new IdentityContext() )
             {
