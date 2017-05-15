@@ -22,11 +22,6 @@ namespace web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            
-            AppUserManager.Create(new AppUser {
-                NikeName="admin",
-                UserName="admin",
-            },"123456");
             return View();
         }
         public ActionResult Login(string username,string password)

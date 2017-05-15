@@ -12,12 +12,9 @@ namespace web
         public void Configuration(IAppBuilder app)
         {
             IdentityContext identity=new IdentityContext();
-            app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<AppUserManager>());
+            //app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<AppUserManager>());
             //ConfigureAuth(app);
-            using (var db=new IdentityContext() )
-            {
-                //new UserManager<AppUser>().Create(new AppUser { });
-            }
+           
         }
     }
 }

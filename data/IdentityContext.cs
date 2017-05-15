@@ -13,21 +13,12 @@ namespace data
         public IdentityContext() : base("IdentityDb") { }
         static IdentityContext()
         {
-            Database.SetInitializer<IdentityContext>(new DropCreateDatabaseAlways<IdentityContext>());
-            
+            Database.SetInitializer(new Init());
         }
-        //public DbSet<UserClaim> UserClaims { get; set; }
-        //public DbSet<AppUser> AppUsers { get; set; }
-        //public DbSet<Role> Roles { get; set; }
-
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Configurations.Add(new AppUserMaping());
-            //modelBuilder.Configurations.Add(new UserClaimMaping());
-            // 移除复数表名公约
         }
         public class Init : CreateDatabaseIfNotExists<IdentityContext>
         {
