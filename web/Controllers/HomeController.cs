@@ -18,15 +18,23 @@ namespace web.Controllers
         public HomeController()
         {
             AppUserManager = new AppUserManager(new UserStore<AppUser>(new IdentityContext()));
+            AppUserManager.Create<AppUser, string>(new AppUser
+            {
+                Email = "123@123.com",
+                Id=Guid.NewGuid().ToString(),
+                NikeName="admin",
+                PhoneNumber="123123",
+                UserName="admin",
+            }, "testadmin");
         }
         // GET: Home
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Login(string username,string password)
+        public ActionResult Login(string username, string password)
         {
-            
+
             return View();
         }
     }

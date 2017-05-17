@@ -1,9 +1,7 @@
-﻿using data.Maping;
-using data.Models;
+﻿using data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace data
@@ -15,23 +13,26 @@ namespace data
         {
             Database.SetInitializer(new Init());
         }
+        public static IdentityContext Create()
+        {
+            return new IdentityContext();
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
         }
-        public class Init : CreateDatabaseIfNotExists<IdentityContext>
+        public class Init : DropCreateDatabaseIfModelChanges<IdentityContext>
         {
             protected override void Seed(IdentityContext context)
             {
-                context.Roles.Add(new IdentityRole { Name="admin",Id=Guid.NewGuid().ToString()});
-                context.SaveChanges();
+                PerformInitialSetup(context);
                 base.Seed(context);
             }
             public void PerformInitialSetup(IdentityContext context)
             {
-                // initial configuration will go here
-                // 初始化配置将放在这儿
+                context.Roles.Add(new IdentityRole { Name = "admin", Id = Guid.NewGuid().ToString() });
+                context.SaveChanges();
             }
         }
     }
