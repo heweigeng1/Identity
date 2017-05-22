@@ -3,6 +3,7 @@ using data.Infrastructure;
 using data.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -14,28 +15,37 @@ namespace web.Controllers
 {
     public class HomeController : Controller
     {
-        private static AppUserManager AppUserManager;
+        private  AppUserManager appUserManager { get { return Request.GetOwinContext().GetUserManager<AppUserManager>(); } }
         public HomeController()
         {
-            AppUserManager = new AppUserManager(new UserStore<AppUser>(new IdentityContext()));
-            AppUserManager.Create<AppUser, string>(new AppUser
-            {
-                Email = "123@123.com",
-                Id=Guid.NewGuid().ToString(),
-                NikeName="admin",
-                PhoneNumber="123123",
-                UserName="admin",
-            }, "testadmin");
         }
         // GET: Home
         public ActionResult Index()
         {
+            var context = appUserManager;
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult Login(string username, string password)
         {
-
-            return View();
+          var user=  appUserManager.Find(username, password);
+            return Json(user,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult reg(string username,string password)
+        {
+          var result=  appUserManager.Create(new AppUser
+            {
+                Email="123@123.com",
+                NikeName="超管",
+                PhoneNumber="1234567890",
+                Id=Guid.NewGuid().ToString(),
+                UserName= username
+          },password);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

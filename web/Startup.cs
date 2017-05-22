@@ -20,7 +20,6 @@ namespace web
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
             });
-
         }
     }
 }

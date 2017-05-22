@@ -7,6 +7,27 @@
 <h2>Login</h2>
 <p>登录页</p>
 <div><label>帐号</label><input type="text" value="" id="username" /></div>
-<div><label>密码</label><input type="text" value=""  id="password"/></div>
-<div><input  type="button" id="isok" value="登录"/></div>
+<div><label>密码</label><input type="text" value="" id="password" /></div>
+<div><input type="button" id="isok" value="登录" /></div>
+<div><input type="button" id="reg" value="注册" /></div>
+@section javascript{
+    <script type="text/javascript">
+        $("#isok").click(function () {
+            $.post("@Url.Action("Login","Home")", {
+                username: $("#username").val(),
+                password: $("#password").val(),
+            }, function (data) {
+                console.log(data)
+            })
+        })
+        $("#reg").click(function () {
+            $.post("@Url.Action("reg","Home")", {
+                username: $("#username").val(),
+                password: $("#password").val(),
+            }, function (data) {
+                console.log(data);
+            })
+        })
+    </script>
+}
 
